@@ -1,0 +1,35 @@
+.logged-in-as {
+  margin: 0 !important;
+  border-radius:0;
+}
+
+body{
+  font-family: 'Comfortaa', cursive;
+}
+
+.btn-rounded{
+  border-radius: 10rem;
+}
+
+a:not(.btn) {
+  text-decoration: none !important;
+}
+
+.navbar{
+  box-shadow: 0 2px 5px rgba(0,0,0,0.16);
+}
+
+.navbar-light .navbar-brand {
+  color: rgba(0,0,0,0.9);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0,0,0,0.7);
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.navbar-light .navbar-nav .nav-link.active {
+  color: $primary;
+}
