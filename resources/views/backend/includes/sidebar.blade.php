@@ -25,6 +25,27 @@
                 </a>
             </li>
 
+            <li class="{{ active_class(if_route_pattern('admin.booking*')) }}">
+                <a href="">
+                    <i class="fa fa-th"></i>
+                    <span>Booking</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(if_route_pattern('admin.ride*')) }}">
+                <a href="">
+                    <i class="fa fa-cab"></i>
+                    <span>Rides</span>
+                </a>
+            </li>
+
+            <li class="{{ active_class(if_route_pattern('admin.payment*')) }}">
+                <a href="">
+                    <i class="fa fa-money"></i>
+                    <span>Payments</span>
+                </a>
+            </li>
+
 
             <li class="header">{{ trans('menus.backend.sidebar.system') }}</li>
 

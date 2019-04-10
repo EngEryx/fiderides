@@ -46,28 +46,18 @@
                         </div><!--form-group row-->
 
                         <div class="form-group row">
-                            {{ html()->label(__('validation.attributes.frontend.phone'))->class('col-md-4 col-form-label')->for('phone') }}
+                            {{ html()->label('Register as a')->class('col-md-4 col-form-label') }}
                             <div class="col-md-6">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-primary" type="button">+254</button>
-                                    </div>
-                                    <input type="text" name="phone" v-model="phone" placeholder="{{ __('validation.attributes.frontend.phone') }}" @change="sendVerificationCode" id="phone" class="form-control" required>
+                                <div class="icheck-primary icheck-inline">
+                                    <input type="radio" name="role" id="passenger" value="{{ config('access.users.default_role') }}" checked>
+                                    <label for="passenger">Passenger</label>
+                                </div>
+                                <div class="icheck-primary icheck-inline">
+                                    <input type="radio" name="role" id="car-owner" value="car owner">
+                                    <label for="car-owner">Car Owner</label>
                                 </div>
                             </div>
                         </div>
-                        {{--<div class="form-group row">--}}
-                            {{--{{ html()->label('Verification')->class('col-md-4 col-form-label')->for('verification') }}--}}
-                            {{--<div class="col-md-6">--}}
-                                {{--<div class="input-group">--}}
-                                    {{--<input type="number" placeholder="Verification" v-model="verification" @keyup="checkCode" @mouseup="checkCode" id="verification" class="form-control">--}}
-                                    {{--<div class="input-group-append">--}}
-                                        {{--<button class="btn" :class="[ verification != check ? 'btn-danger' : 'btn-primary']" type="button"><i class="fa" :class="[ verification != check ? 'fa-exclamation-triangle' : 'fa-check-circle']"></i></button>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<span class="text-danger" v-show="error">The verification code does not match.</span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
 
                         <div class="form-group row">
                             {{ html()->label(__('validation.attributes.frontend.password'))->class('col-md-4 col-form-label')->for('password') }}

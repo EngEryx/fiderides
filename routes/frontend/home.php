@@ -15,19 +15,15 @@ Route::post('contact/send', 'ContactController@send')->name('contact.send');
  */
 Route::group(['middleware' => ['auth', 'password_expires']], function () {
     Route::group(['namespace' => 'User', 'as' => 'user.'], function () {
-        /*
-         * User Dashboard Specific
-         */
+        #User Dashboard Specific
         Route::get('dashboard', 'DashboardController@index')->name('dashboard');
-
-        /*
-         * User Account Specific
-         */
+        #User Account Specific
         Route::get('account', 'AccountController@index')->name('account');
-
-        /*
-         * User Profile Specific
-         */
+        #User Profile Specific
         Route::patch('profile/update', 'ProfileController@update')->name('profile.update');
+    });
+
+    Route::group(['prefix' => 'ride', 'as' => 'ride.'], function (){
+        Route::view('/', 'frontend.ride.index')->name('index');
     });
 });
