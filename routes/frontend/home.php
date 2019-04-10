@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
         Route::patch('profile/update', 'ProfileController@update')->name('profile.update');
     });
 
-    Route::group(['prefix' => 'ride', 'as' => 'ride.'], function (){
-        Route::view('/', 'frontend.ride.index')->name('index');
+    Route::group(['namespace' => 'Owner'], function (){
+        Route::resources(['ride' => 'RideController']);
     });
 });

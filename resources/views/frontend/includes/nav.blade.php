@@ -18,7 +18,7 @@
                 @endcan
                 <li class="nav-item"><a class="nav-link {{active_class(if_route('frontend.user.dashboard'))}}" href="{{route('frontend.user.dashboard')}}">Dashboard</a></li>
                 @role('car owner')
-                    <li class="nav-item"><a class="nav-link {{active_class(if_route('frontend.ride.index'))}}" href="{{route('frontend.ride.index')}}">Rides</a></li>
+                    <li class="nav-item"><a class="nav-link {{active_class(if_route_pattern('frontend.ride*'))}}" href="{{route('frontend.ride.index')}}">Rides</a></li>
                 @endrole
                 <li class="nav-item"><a class="nav-link {{active_class(if_route('frontend.user.account'))}}" href="{{route('frontend.user.account')}}">Account</a></li>
                 <li  class="nav-item"><a class="nav-link {{active_class(if_route('frontend.contact'))}}" href="{{route('frontend.contact')}}">Contact Us</a></li>
