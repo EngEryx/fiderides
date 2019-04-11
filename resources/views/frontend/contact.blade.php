@@ -6,7 +6,7 @@
     <div class="container bg-white mt-3">
         <div class="row">
             <div class="col-12 col-md-6 bg-light d-flex align-items-center py-5">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate dolorum eveniet iure laudantium libero neque, possimus praesentium provident quis ratione repellat vel velit vero. Autem illo quod reprehenderit repudiandae veritatis?</p>
+                <p>Carpooling is a transport system based on a shared use of private cars, which can be casual or be organized by a service. Carpooling reduces traffic since we have a few cars on the road. It’s also economic since the travel expenses are shared among the riders.</p>
             </div>
             <div class="col-12 col-md-6 my-5">
                 {{ html()->form('POST', route('frontend.contact.send'))->class('form-horizontal')->open() }}

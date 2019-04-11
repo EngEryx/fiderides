@@ -95,11 +95,12 @@ class UserRepository extends BaseRepository
             $user = parent::create([
                 'first_name'        => $data['first_name'],
                 'last_name'         => $data['last_name'],
+                'phone'             => intPhoneNumber($data['phone']),
                 'email'             => $data['email'],
                 'confirmation_code' => md5(uniqid(mt_rand(), true)),
                 'active'            => 1,
                 'password'          => Hash::make($data['password']),
-                                    // If users require approval or needs to confirm email
+                // If users require approval or needs to confirm email
                 'confirmed'         => config('access.users.requires_approval') || config('access.users.confirm_email') ? 0 : 1,
             ]);
 
@@ -142,26 +143,27 @@ class UserRepository extends BaseRepository
         $user = $this->getById($id);
         $user->first_name = $input['first_name'];
         $user->last_name = $input['last_name'];
+        $user->phone = intPhoneNumber($input['phone']);
+        $user->timezone = $input['timezone'];
+        $user->avatar_type = $input['avatar_type'];
 
         // Upload profile image if necessary
         if ($image) {
             $user->avatar_location = $image->store('/avatars', 'public');
         } else {
-            if (isset($input['avatar_type']) ){
-                // No image being passed
-                if ($input['avatar_type'] == 'storage') {
-                    // If there is no existing image
-                    if (! strlen(auth()->user()->avatar_location)) {
-                        throw new GeneralException('You must supply a profile image.');
-                    }
-                } else {
-                    // If there is a current image, and they are not using it anymore, get rid of it
-                    if (strlen(auth()->user()->avatar_location)) {
-                        Storage::disk('public')->delete(auth()->user()->avatar_location);
-                    }
-
-                    $user->avatar_location = null;
+            // No image being passed
+            if ($input['avatar_type'] == 'storage') {
+                // If there is no existing image
+                if (! strlen(auth()->user()->avatar_location)) {
+                    throw new GeneralException('You must supply a profile image.');
                 }
+            } else {
+                // If there is a current image, and they are not using it anymore, get rid of it
+                if (strlen(auth()->user()->avatar_location)) {
+                    Storage::disk('public')->delete(auth()->user()->avatar_location);
+                }
+
+                $user->avatar_location = null;
             }
         }
 
@@ -275,6 +277,7 @@ class UserRepository extends BaseRepository
             $user = parent::create([
                 'first_name'  => $nameParts['first_name'],
                 'last_name'  => $nameParts['last_name'],
+                'phone'  => null,
                 'email' => $user_email,
                 'active' => 1,
                 'confirmed' => 1,

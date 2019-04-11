@@ -7,6 +7,7 @@
                 <h3 class="text-primary mt-3">
                     <i class="fa fa-cab pull-right"></i> Create A Ride
                 </h3>
+                <hr style="width: 50%; border-width: .2rem;" class="my-1 pull-left border-primary">
             </div>
             <div class="col-12">
                 <form action="{{ old('id') ? route('frontend.ride.update', ['ride' => old('id')]):route('frontend.ride.store') }}" class="form-horizontal my-3" method="post">
@@ -30,13 +31,19 @@
                             <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Destination type</label>
                                 <div class="col-md-8">
-                                    <div class="icheck-primary icheck-inline">
-                                        <input type="radio" v-model="ride.kind" name="kind" id="passenger" value="0">
-                                        <label for="passenger">Single Trip</label>
-                                    </div>
-                                    <div class="icheck-primary icheck-inline">
-                                        <input type="radio" v-model="ride.kind" name="kind" id="car-owner" value="1">
-                                        <label for="car-owner">Intercity Trip</label>
+                                    <div class="row">
+                                        <div class="col-auto my-1">
+                                            <div class="custom-control custom-checkbox mr-sm-2">
+                                                <input type="radio" class="custom-control-input" v-model="ride.kind" name="kind" id="passenger" value="0">
+                                                <label class="custom-control-label" for="passenger">Single Trip</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto my-1">
+                                            <div class="custom-control custom-checkbox mr-sm-2">
+                                                <input type="radio"  class="custom-control-input" v-model="ride.kind" name="kind" id="car-owner" value="1">
+                                                <label class="custom-control-label" for="car-owner">Intercity Trip</label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

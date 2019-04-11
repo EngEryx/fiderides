@@ -26,4 +26,11 @@ Route::group(['middleware' => ['auth', 'password_expires']], function () {
     Route::group(['namespace' => 'Owner'], function (){
         Route::resources(['ride' => 'RideController']);
     });
+
+    Route::group(['namespace' => 'Passenger', 'prefix' => 'book', 'as' => 'book.'], function (){
+        Route::get('/', 'BookController@index')->name('index');
+        Route::get('{ride}', 'BookController@ride')->name('ride');
+        Route::post('{ride}/trip', 'BookController@trip')->name('trip');
+        Route::post('{ride}/parcel', 'BookController@parcel')->name('parcel');
+    });
 });

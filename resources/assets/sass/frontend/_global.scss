@@ -31,12 +31,12 @@ a:not(.btn) {
 }
 
 .navbar-light .navbar-nav .nav-link.active {
-  color: $blue;
+  color: $yellow;
 }
 
 .icheck-primary>input:first-child:checked+input[type=hidden]+label:before, .icheck-primary>input:first-child:checked+label:before{
-  background-color: $blue;
-  border-color: $blue;
+  background-color: $yellow;
+  border-color: $yellow;
 }
 
 [v-cloak] > * { display:none; }

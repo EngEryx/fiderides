@@ -20,6 +20,9 @@
                 @role('car owner')
                     <li class="nav-item"><a class="nav-link {{active_class(if_route_pattern('frontend.ride*'))}}" href="{{route('frontend.ride.index')}}">Rides</a></li>
                 @endrole
+                @role('passenger')
+                    <li class="nav-item"><a class="nav-link {{active_class(if_route_pattern('frontend.book*'))}}" href="{{route('frontend.book.index')}}">Book</a></li>
+                @endrole
                 <li class="nav-item"><a class="nav-link {{active_class(if_route('frontend.user.account'))}}" href="{{route('frontend.user.account')}}">Account</a></li>
                 <li  class="nav-item"><a class="nav-link {{active_class(if_route('frontend.contact'))}}" href="{{route('frontend.contact')}}">Contact Us</a></li>
                 <li  class="nav-item"><a class="nav-link" href="{{route('frontend.auth.logout')}}">Logout</a></li>

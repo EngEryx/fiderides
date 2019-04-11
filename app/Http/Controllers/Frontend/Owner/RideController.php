@@ -46,7 +46,7 @@ class RideController extends Controller
         if ($ride->kind == 1){
             foreach (explode(',', $request->destination) as $key => $item) $ride->destinations()->create(['destination' => $item, 'order' => $key++]);
         } else {
-            $ride->destinations()->create($request->only('destination'));
+            $ride->destinations()->create(array_merge(['order' => 1], $request->only('destination')));
         }
 
         return redirect()->route('frontend.ride.index');
@@ -99,7 +99,7 @@ class RideController extends Controller
                 $ids[] = $destination->id;
             }
         } else {
-            $destination = $ride->destinations()->updateOrCreate($request->only('destination'));
+            $destination = $ride->destinations()->updateOrCreate(array_merge(['order' => 1], $request->only('destination')));
             $ids[] = $destination->id;
         }
         $ride->destinations()->whereNotIn('id', $ids)->delete();

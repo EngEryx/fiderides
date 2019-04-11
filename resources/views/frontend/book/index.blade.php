@@ -5,20 +5,21 @@
         <div class="row">
             <div class="col-12">
                 <h3 class="text-primary mt-3">
-                    <i class="fa fa-cab pull-right badge badge-success"></i> My Rides
+                    <img src="{{ asset('img/frontend/cab-gifs/cab-1.gif') }}" class="img-fluid pull-right" width="120" alt="">
+                    Book a Ride
                 </h3>
                 <hr style="width: 50%; border-width: .2rem;" class="my-1 pull-left border-primary">
             </div>
         </div>
         <div class="row">
             @foreach($rides as $ride)
-                <div class="col-12 col-md-6 d-md-flex align-content-stretch">
+                <div class="col-12 col-md-4 d-flex align-content-stretch">
                     <div class="card border-primary rounded-0 w-100 my-3">
                         <div class="box-body">
                             @include('frontend.includes.ride')
-                        </div>
-                        <div class="card-footer">
-                            <a href="{{ route('frontend.ride.edit', $ride) }}" class="btn btn-primary text-white">Edit Ride</a>
+                            <div class="text-center">
+                                <a href="{{ route('frontend.book.ride', $ride) }}" class="btn btn-primary text-white rounded-0">Book Ride</a>
+                            </div>
                         </div>
                     </div>
                 </div>

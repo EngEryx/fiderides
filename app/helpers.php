@@ -141,7 +141,7 @@ if (! function_exists('form_submit')) {
      *
      * @return mixed
      */
-    function form_submit($title, $classes = 'btn btn-primary pull-right')
+    function form_submit($title, $classes = 'btn btn-primary text-white pull-right')
     {
         return resolve(HtmlHelper::class)->formSubmit($title, $classes);
     }
@@ -159,5 +159,39 @@ if (! function_exists('get_user_timezone')) {
         }
 
         return 'UTC';
+    }
+}
+
+if (! function_exists('plainPhoneNumber')) {
+    /*
+     * 10 digit phone number(ie 0712345678)
+     *
+     */
+    function plainPhoneNumber($phone) {
+        if (starts_with($phone,'2547')){
+            return str_replace_first('2547','07', $phone);
+        }elseif (starts_with($phone,'7')){
+            return str_replace_first('7','07', $phone);
+        }else{
+            return $phone;
+        }
+    }
+}
+
+
+if (! function_exists('intPhoneNumber')) {
+    /*
+     * 12 digit phone number (without + ie 254712345678)
+     *
+     */
+    function intPhoneNumber($phone)
+    {
+        if (starts_with($phone, '07')) {
+            return str_replace_first('07', '2547', $phone);
+        } elseif (starts_with($phone, '7')) {
+            return str_replace_first('7', '2547', $phone);
+        } else {
+            return $phone;
+        }
     }
 }
