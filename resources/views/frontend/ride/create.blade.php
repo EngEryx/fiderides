@@ -21,14 +21,21 @@
                             </div>
                             <hr>
                             <div class="form-group row">
+                                <label for="start_time" class="col-md-4 col-form-label">Start Time</label>
+                                <div class="col-md-8">
+                                    <input type="time" name="start_time" id="start_time" class="form-control" value="{{ old('start_time') }}">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group row">
                                 <label class="col-md-4 col-form-label">Destination type</label>
                                 <div class="col-md-8">
                                     <div class="icheck-primary icheck-inline">
-                                        <input type="radio" v-model="ride.kind" name="role" id="passenger" value="0">
+                                        <input type="radio" v-model="ride.kind" name="kind" id="passenger" value="0">
                                         <label for="passenger">Single Trip</label>
                                     </div>
                                     <div class="icheck-primary icheck-inline">
-                                        <input type="radio" v-model="ride.kind" name="role" id="car-owner" value="1">
+                                        <input type="radio" v-model="ride.kind" name="kind" id="car-owner" value="1">
                                         <label for="car-owner">Intercity Trip</label>
                                     </div>
                                 </div>
@@ -40,6 +47,13 @@
                                 <label for="passengers" class="col-md-4 col-form-label">No of Passengers</label>
                                 <div class="col-md-8">
                                     <input type="number" name="passengers" id="passengers" class="form-control" value="{{ old('passengers') }}">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group row">
+                                <label for="end_time" class="col-md-4 col-form-label">Expected Arrival</label>
+                                <div class="col-md-8">
+                                    <input type="time" name="end_time" id="end_time" class="form-control" value="{{ old('end_time') }}">
                                 </div>
                             </div>
                             <hr>
