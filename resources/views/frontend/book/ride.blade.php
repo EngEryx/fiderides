@@ -27,18 +27,22 @@
                     <div class="card-footer bg-white p-1">
                         <form class="form-inline" action="{{ route('frontend.book.trip', $ride) }}" method="post">
                             @csrf
-                            <label class="sr-only" for="destination">Destination</label>
-                            <div class="input-group">
-                                <select name="destination_id" id="destination" class="form-control" required>
-                                    <option value="" selected disabled="">-- Select Destination --</option>
-                                    @foreach($ride->destinations()->orderBy('order')->get() as $item)
-                                        <option value="{{ $item->id }}">{{ $item->destination }}</option>
-                                    @endforeach
-                                </select>
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-outline-secondary">Submit</button>
-                                </div>
-                            </div>
+                            <label class="sr-only" for="start">From</label>
+                            <select name="start_id" id="start" class="form-control" required>
+                                <option value="" selected disabled="">-- From --</option>
+                                <option value="0">{{ $ride->start }}</option>
+                                @foreach($ride->destinations()->orderBy('order')->get() as $item)
+                                    <option value="{{ $item->id }}">{{ $item->destination }}</option>
+                                @endforeach
+                            </select>
+                            <label class="sr-only" for="destination">To</label>
+                            <select name="destination_id" id="destination" class="form-control" required>
+                                <option value="" selected disabled="">-- To --</option>
+                                @foreach($ride->destinations()->orderBy('order')->get() as $item)
+                                    <option value="{{ $item->id }}">{{ $item->destination }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="btn btn-outline-secondary">Submit</button>
                         </form>
                     </div>
                 </div>

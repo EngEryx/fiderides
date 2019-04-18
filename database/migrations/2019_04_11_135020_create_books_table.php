@@ -19,6 +19,8 @@ class CreateBooksTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('ride_id');
             $table->foreign('ride_id')->references('id')->on('rides')->onDelete('cascade');
+            $table->unsignedInteger('start_id')->nullable();
+            $table->foreign('start_id')->references('id')->on('destinations')->onDelete('set null');
             $table->unsignedInteger('destination_id')->nullable();
             $table->foreign('destination_id')->references('id')->on('destinations')->onDelete('cascade');
             $table->integer('weight')->nullable();

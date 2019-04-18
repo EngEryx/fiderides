@@ -23,7 +23,9 @@ class BookController extends Controller
 
     public function trip(Request $request, Ride $ride)
     {
-        Book::query()->create(array_merge(['ride_id' => $ride->id, 'user_id' => auth()->id()], $request->only('destination_id')));
+        $data = ['ride_id' => $ride->id, 'user_id' => auth()->id()];
+        if ($request->start_id != 0) $data['start_id'] = $request->start_id;
+        Book::query()->create(array_merge($data, $request->only('destination_id')));
         return redirect()->route(home_route())->withFlashSuccess('Your booking has been received. Proceed to make payment');
     }
 

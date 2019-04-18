@@ -117,20 +117,4 @@ class RideController extends Controller
     {
         //
     }
-
-    public function table(Request $request)
-    {
-        {
-            try {
-                return datatables()->of(Ride::query()->get())
-                    ->escapeColumns('actions')
-                    ->addColumn('actions',function($ride){
-                        return $ride->action_buttons;
-                    })
-                    ->toJson();
-            } catch (\Exception $e) {
-                Log::error("Rides/Table".$e->getMessage());
-            }
-        }
-    }
 }
