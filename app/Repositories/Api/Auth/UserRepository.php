@@ -19,25 +19,15 @@ use Illuminate\Support\Facades\Hash;
 
 class UserRepository extends BaseRepository
 {
-    /**
-     * @var PersonRepository
-     */
-    private $people;
-    /**
-     * @var CitizenRepository
-     */
-    private $citizens;
 
     /**
      * UserRepository constructor.
      * @param PersonRepository $people
      * @param CitizenRepository $citizens
      */
-    public function __construct(PersonRepository $people, CitizenRepository $citizens)
+    public function __construct()
     {
         parent::__construct();
-        $this->people = $people;
-        $this->citizens = $citizens;
     }
 
     /**
@@ -54,7 +44,7 @@ class UserRepository extends BaseRepository
     {
         return DB::transaction(function() use($data){
             $user = parent::create([
-                'user_type' => '2',
+                'person_type' => '2',
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
                 'email' => $data['email'],
@@ -65,13 +55,13 @@ class UserRepository extends BaseRepository
             ]);
             if ($user) {
                 //Set User
-                $data['user_id'] = $user->id;
-                $person = $this->people->create(array_only($data,[
-                    'phone','national_id','email','user_id'
-                ]));
-                $this->citizens->create([
-                    'people_id' => $person->id,
-                ]);
+//                $data['user_id'] = $user->id;
+//                $person = $this->people->create(array_only($data,[
+//                    'phone','national_id','email','user_id'
+//                ]));
+//                $this->citizens->create([
+//                    'people_id' => $person->id,
+//                ]);
                 //TODO: Attach default roles.
                 return $user;
             }

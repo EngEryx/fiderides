@@ -30,12 +30,12 @@ trait AuthenticateApiUser {
         if(is_null($oauth_client)){
             return Response::json(['error'=>"The API Oauth Client for passport has not been set!"]);
         }
-        $username = $this->getUserAuthField(is_null($username) ? $request->username : $username);
+//        $username = $this->getUserAuthField(is_null($username) ? $request->username : $username);
         $params=[
             'grant_type'=>'password',
             'client_id'=> $oauth_client->id,
             'client_secret'=> $oauth_client->secret,
-            'username'=> $username,
+            'username'=> $request->username,
             'password'=>is_null($password) ? $request->password : $password,
             'scope'=>'*'
         ];
