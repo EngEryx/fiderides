@@ -6,6 +6,7 @@
             <div class="col-12">
                 <h3 class="text-primary mt-3">
                     <i class="fa fa-cab pull-right badge badge-success"></i> My Rides
+                    <a href="{{ route('frontend.ride.create') }}" class="btn btn-primary text-white pull-right">Add</a>
                 </h3>
                 <hr style="width: 50%; border-width: .2rem;" class="my-1 pull-left border-primary">
             </div>

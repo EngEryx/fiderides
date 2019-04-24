@@ -43,10 +43,14 @@ class RideController extends Controller
         ]);
 
         $ride = Ride::query()->create(array_merge(['user_id' => auth()->id()], $request->except('_token', 'destination')));
+        $data = explode(',', $request->destination);
         if ($ride->kind == 1){
-            foreach (explode(',', $request->destination) as $key => $item) $ride->destinations()->create(['destination' => $item, 'order' => $key++]);
+            foreach ($data as $key => $item) {
+                if($key % 2 != 0) continue;
+                $ride->destinations()->create(['destination' => $item, 'amount' => $data[$key+1], 'order' => $key++]);
+            }
         } else {
-            $ride->destinations()->create(array_merge(['order' => 1], $request->only('destination')));
+            $ride->destinations()->create(['order' => 1, 'destination' => $data[0], 'amount' => $data[1]]);
         }
 
         return redirect()->route('frontend.ride.index');
@@ -71,7 +75,7 @@ class RideController extends Controller
      */
     public function edit(Ride $ride)
     {
-        $ride->destination = implode($ride->destinations()->get()->pluck('destination')->toArray(), ', ');
+        $ride->destination = implode(array_flatten($ride->destinations()->get(['destination', 'amount'])->toArray()), ', ');
         session()->flash('_old_input', $ride);
 
         return view('frontend.ride.create');
@@ -93,13 +97,16 @@ class RideController extends Controller
         $ride->update($request->except('_token', 'destination'));
 
         $ids = [];
+        $data = explode(',', $request->destination);
+        dd($data);
         if ($ride->kind == 1){
-            foreach (explode(',', $request->destination) as $key => $item){
-                $destination = $ride->destinations()->updateOrCreate(['destination' => $item, 'order' => $key++]);
+            foreach ($data as $key => $item){
+                if($key % 2 != 0) continue;
+                $destination = $ride->destinations()->updateOrCreate(['destination' => $item, 'amount' => $data[$key+1], 'order' => $key++]);
                 $ids[] = $destination->id;
             }
         } else {
-            $destination = $ride->destinations()->updateOrCreate(array_merge(['order' => 1], $request->only('destination')));
+            $destination = $ride->destinations()->updateOrCreate(['order' => 1, 'destination' => $data[0], 'amount' => $data[1]]);
             $ids[] = $destination->id;
         }
         $ride->destinations()->whereNotIn('id', $ids)->delete();

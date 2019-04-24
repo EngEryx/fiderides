@@ -65,9 +65,9 @@
                             </div>
                             <hr>
                             <div class="form-group row">
-                                <label for="destination" class="col-md-4 col-form-label">Destination</label>
+                                <label for="destination" class="col-md-4 col-form-label">Destination / Amount</label>
                                 <div class="col-md-8">
-                                    <input type="text" v-if="ride.kind == 0" name="destination" id="destination" class="form-control" value="{{ old('destination') }}">
+                                    <input type="text" v-if="ride.kind == 0" placeholder="seperate with comma" name="destination" id="destination" class="form-control" value="{{ old('destination') }}">
                                     <textarea v-else name="destination" rows="1" placeholder="seperate with comma" class="form-control" id="destination">{{ old('destination') }}</textarea>
                                 </div>
                             </div>
