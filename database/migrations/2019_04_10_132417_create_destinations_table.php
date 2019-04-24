@@ -19,6 +19,7 @@ class CreateDestinationsTable extends Migration
             $table->foreign('ride_id')->references('id')->on('rides')->onDelete('cascade');
             $table->string('destination');
             $table->integer('order');
+            $table->integer('amount');
             $table->timestamps();
         });
     }

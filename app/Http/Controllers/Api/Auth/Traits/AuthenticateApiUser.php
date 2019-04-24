@@ -9,8 +9,6 @@ namespace App\Http\Controllers\Api\Auth\Traits;
  * Time: 12:41 PM
  */
 
-use App\Models\Access\Api\OauthClient;
-use App\Repositories\Api\Auth\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
