@@ -37,13 +37,9 @@ Route::group(['namespace'=>'Api','prefix'=>'v1'], function (){
         /*
          * Any other routes.
          */
-        Route::group(['namespace'=>'Locale'], function(){
-            Route::get('/counties','CountyController@getAll');
-        });
-        Route::group(['namespace'=>'Crime'], function(){
-            Route::get('/crimes','CrimeController@getIndex');
-            Route::post('/crimes/tags','CrimeController@getTags');
-            Route::post('/crimes/report','CrimeController@postCrime');
+
+        Route::group(['namespace'=>'Rides'], function(){
+            Route::get('/rides','RidesController@getRides');
         });
     });
 });
