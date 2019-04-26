@@ -40,7 +40,10 @@ Route::group(['namespace'=>'Api','prefix'=>'v1'], function (){
 
         Route::group(['namespace'=>'Rides'], function(){
             Route::get('/rides','RidesController@getRides');
+            Route::post('/rides/ride','RidesController@bookRide');
+            Route::post('/rides/verify','RidesController@confirmRide');
         });
+
     });
 });
 

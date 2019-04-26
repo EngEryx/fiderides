@@ -3,6 +3,7 @@
 namespace App\Models\Owner;
 
 use App\Models\Auth\User;
+use App\Models\Passenger\Book;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +11,7 @@ class Ride extends Model
 {
     protected $guarded = [];
 
-    protected $appends = ['details', 'duration'];
+    protected $appends = ['details', 'duration','remaining_seats','has_booked','has_paid'];
 
     public function user()
     {
@@ -32,9 +33,24 @@ class Ride extends Model
         return $details;
     }
 
+    public function getHasBookedAttribute()
+    {
+        return Book::query()->where(['ride_id' => $this->id,'user_id' => auth()->id()])->exists();
+    }
+
+    public function getRemainingSeatsAttribute()
+    {
+        return (int)$this->passengers - Book::query()->where(['ride_id' => $this->id])->count();
+    }
+
+    public function getHasPaidAttribute()
+    {
+        return false;
+    }
+
     public function getDurationAttribute()
     {
-        $duration = Carbon::parse($this->start_time)->format('H:i') . ' - ' . Carbon::parse($this->end_time)->format('H:i');
+        $duration = Carbon::parse($this->start_time)->format('H:i A') . ' - ' . Carbon::parse($this->end_time)->format('H:i A');
         return $duration;
     }
 }
