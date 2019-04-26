@@ -37,14 +37,13 @@ Route::group(['namespace'=>'Api','prefix'=>'v1'], function (){
         /*
          * Any other routes.
          */
-        Route::group(['namespace'=>'Locale'], function(){
-            Route::get('/counties','CountyController@getAll');
+
+        Route::group(['namespace'=>'Rides'], function(){
+            Route::get('/rides','RidesController@getRides');
+            Route::post('/rides/ride','RidesController@bookRide');
+            Route::post('/rides/verify','RidesController@confirmRide');
         });
-        Route::group(['namespace'=>'Crime'], function(){
-            Route::get('/crimes','CrimeController@getIndex');
-            Route::post('/crimes/tags','CrimeController@getTags');
-            Route::post('/crimes/report','CrimeController@postCrime');
-        });
+
     });
 });
 
