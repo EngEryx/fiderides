@@ -36,6 +36,11 @@
                                 <a href="#" class="list-group-item">{{ $booking->user->full_name }} <span class="pull-right">Kshs {{ number_format($booking->amount, 2) }}</span> <br> <span class="badge badge-primary text-white"><i class="fa fa-map-marker"></i> {{ $booking->details }}  <i class="fa fa-clock-o"></i> {{ $booking->ride->duration }}</span></a>
                             @endforeach
                             @endrole
+                            @role('passenger')
+                            @foreach($rides as $booking)
+                                <a href="#" class="list-group-item">{{ $booking->details }} <span class="pull-right">Kshs {{ number_format($booking->amount, 2) }}</span> <br> <span class="badge badge-primary text-white"><i class="fa fa-user"></i> {{ $booking->ride->user->full_name }}  <i class="fa fa-clock-o"></i> {{ $booking->ride->duration }}</span></a>
+                            @endforeach
+                            @endrole
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -44,6 +49,11 @@
                             @role('car owner')
                             @foreach($parcels as $parcel)
                                 <a href="#" class="list-group-item">{{ $parcel->user->full_name }} <br> <span class="badge badge-primary text-white"><i class="fa fa-map-marker"></i> {{ $parcel->details }}  <i class="fa fa-clock-o"></i> {{ $parcel->ride->duration }}</span></a>
+                            @endforeach
+                            @endrole
+                            @role('car owner')
+                            @foreach($goods as $parcel)
+                                <a href="#" class="list-group-item">{{ $parcel->details }} <br> <span class="badge badge-primary text-white"><i class="fa fa-user"></i> {{ $parcel->ride->user->full_name }}  <i class="fa fa-clock-o"></i> {{ $parcel->ride->duration }}</span></a>
                             @endforeach
                             @endrole
                         </div>
