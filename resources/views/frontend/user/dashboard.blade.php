@@ -31,11 +31,21 @@
                     <div class="col-md-6">
                         <div class="list-group list-group-flush mb-3">
                             <a href="#" class="list-group-item active">Confirmed Bookings</a>
+                            @role('car owner')
+                            @foreach($bookings as $booking)
+                                <a href="#" class="list-group-item">{{ $booking->user->full_name }} <span class="pull-right">Kshs {{ number_format($booking->amount, 2) }}</span> <br> <span class="badge badge-primary text-white"><i class="fa fa-map-marker"></i> {{ $booking->details }}  <i class="fa fa-clock-o"></i> {{ $booking->ride->duration }}</span></a>
+                            @endforeach
+                            @endrole
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="list-group list-group-flush mb-3">
                             <a href="#" class="list-group-item active">Parcels Sent</a>
+                            @role('car owner')
+                            @foreach($parcels as $parcel)
+                                <a href="#" class="list-group-item">{{ $parcel->user->full_name }} <br> <span class="badge badge-primary text-white"><i class="fa fa-map-marker"></i> {{ $parcel->details }}  <i class="fa fa-clock-o"></i> {{ $parcel->ride->duration }}</span></a>
+                            @endforeach
+                            @endrole
                         </div>
                     </div>
                 </div>

@@ -40,7 +40,7 @@
             </li>
 
             <li class="{{ active_class(if_route_pattern('admin.payment*')) }}">
-                <a href="">
+                <a href="{{ route('admin.payment.index') }}">
                     <i class="fa fa-money"></i>
                     <span>Payments</span>
                 </a>

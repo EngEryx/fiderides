@@ -2,7 +2,7 @@
 
 @section('page-header')
     <h1>
-        {{ ucwords(app_name()) }} <small>Bookings</small>
+        {{ ucwords(app_name()) }} <small>Payments</small>
     </h1>
 @endsection
 
@@ -11,7 +11,7 @@
         <div class="col-xs-12">
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h2 class="box-title">Bookings</h2>
+                    <h2 class="box-title">Payments</h2>
                     <div class="box-tools pull-right">
                         <button class="btn  btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     </div>
@@ -22,14 +22,11 @@
                             <thead>
                             <tr>
                                 <th>Created at</th>
-                                <th>Passenger</th>
+                                <th>Txn Code</th>
                                 <th>Phone</th>
-                                <th>Details</th>
-                                <th>Owner</th>
-                                <th>Duration</th>
+                                <th>Name</th>
                                 <th>Amount</th>
                                 <th>Status</th>
-                                <th style="max-width: 40%;">{{ trans('labels.general.actions') }}</th>
                             </tr>
                             </thead>
                         </table>
@@ -56,7 +53,7 @@
                 serverSide: true,
                 autoWidth: false,
                 ajax: {
-                    url: '{{ route("admin.booking.table") }}',
+                    url: '{{ route("admin.payment.table") }}',
                     type: 'post',
                     error: function (xhr, err) {
                         if (err === 'parsererror')
@@ -65,14 +62,11 @@
                 },
                 columns: [
                     {data: 'created_at', name: 'created_at'},
-                    {data: 'user.full_name', name: 'user.full_name', defaultContent: '<span class="label label-success">unknown</span>'},
-                    {data: 'user.phone', name: 'user.phone', defaultContent: '<span class="label label-success">unknown</span>'},
-                    {data: 'details', name: 'details'},
-                    {data: 'ride.user.full_name', name: 'ride.user.full_name', defaultContent: '<span class="label label-success">unknown</span>'},
-                    {data: 'ride.duration', name: 'ride.duration', defaultContent: '<span class="label label-success">unknown</span>'},
-                    {data: 'amount', name: 'amount'},
-                    {data: 'status_formatted', name: 'status_formatted'},
-                    {data: 'actions', name: 'actions', searchable: false, sortable: false}
+                    {data: 'trans_id', name: 'trans_id'},
+                    {data: 'msisdn', name: 'msisdn'},
+                    {data: 'kyc_name', name: 'kyc_name'},
+                    {data: 'trans_amount', name: 'trans_amount'},
+                    {data: 'status', name: 'status'}
                 ],
                 order: [[0, "desc"]]
             });

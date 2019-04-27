@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\Composers\Frontend\DashboardComposer;
 use Illuminate\Support\Facades\View;
 use App\Http\Composers\GlobalComposer;
 use Illuminate\Support\ServiceProvider;
@@ -22,24 +23,17 @@ class ComposerServiceProvider extends ServiceProvider
         /*
          * Global
          */
-        View::composer(
-        // This class binds the $logged_in_user variable to every view
-            '*',
-            GlobalComposer::class
-        );
+        View::composer('*', GlobalComposer::class);
 
         /*
          * Frontend
          */
+        View::composer('frontend.user.dashboard', DashboardComposer::class);
 
         /*
          * Backend
          */
-        View::composer(
-        // This binds items like number of users pending approval when account approval is set to true
-            'backend.includes.sidebar',
-            SidebarComposer::class
-        );
+        View::composer('backend.includes.sidebar', SidebarComposer::class);
     }
 
     /**
