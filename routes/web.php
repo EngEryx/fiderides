@@ -7,6 +7,7 @@
 
 // Switch between the included languages
 Route::get('lang/{lang}', 'LanguageController');
+Route::resource('/mnet/sms/gateway', 'GatewayAPI');
 
 /*
  * Frontend Routes
