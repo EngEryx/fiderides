@@ -35,12 +35,12 @@ class Ride extends Model
 
     public function getHasBookedAttribute()
     {
-        return Book::query()->where(['ride_id' => $this->id,'user_id' => auth()->id()])->exists();
+        return Book::query()->where(['ride_id' => $this->id,'user_id' => auth()->id(),'status' => 1])->exists();
     }
 
     public function getRemainingSeatsAttribute()
     {
-        return (int)$this->passengers - Book::query()->where(['ride_id' => $this->id])->count();
+        return (int)$this->passengers - Book::query()->where(['ride_id' => $this->id,'status' => 1])->count();
     }
 
     public function getHasPaidAttribute()

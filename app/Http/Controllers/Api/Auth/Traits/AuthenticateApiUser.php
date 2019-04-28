@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Api\Auth\Traits;
  * Time: 12:41 PM
  */
 
+use App\Models\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ trait AuthenticateApiUser {
     public function getAuthToken($request, $username=null,$password=null)
     {
         $oauth_client = Client::where(["password_client"=>1])->get()->last();
+
         if(is_null($oauth_client)){
             return Response::json(['error'=>"The API Oauth Client for passport has not been set!"]);
         }
@@ -37,6 +39,13 @@ trait AuthenticateApiUser {
             'password'=>is_null($password) ? $request->password : $password,
             'scope'=>'*'
         ];
+
+        $user = User::where(['email' => $request->username]);
+        if($user->exists()){
+            $user = $user->first();
+            if(!$user->hasRole('passenger'))
+                return response()->json(['error' => "User not allowed"],401);
+        }
 
         $request->request->add($params);
 
