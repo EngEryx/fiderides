@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Exceptions\GeneralException;
 use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use App\Events\Frontend\Auth\UserConfirmed;
 use App\Events\Frontend\Auth\UserProviderRegistered;
@@ -144,12 +145,21 @@ class UserRepository extends BaseRepository
         $user->first_name = $input['first_name'];
         $user->last_name = $input['last_name'];
         $user->phone = intPhoneNumber($input['phone']);
-        $user->timezone = $input['timezone'];
+        if (array_key_exists('timezone', $input))$user->timezone = $input['timezone'];
         $user->avatar_type = $input['avatar_type'];
 
         // Upload profile image if necessary
         if ($image) {
-            $user->avatar_location = $image->store('/avatars', 'public');
+            $file = time() . '.' . $image->getClientOriginalExtension();
+            $path = public_path('storage/avatars/');
+            try {
+                $previous = public_path(auth()->user()->avatar_location);
+                $image->move($path, $file);
+                $user->avatar_location = '/storage/avatars/' . $file;
+                if (strlen($previous)) unlink($previous);
+            } catch (\Exception $e) {
+                Log::error($e->getMessage());
+            }
         } else {
             // No image being passed
             if ($input['avatar_type'] == 'storage') {
@@ -160,7 +170,7 @@ class UserRepository extends BaseRepository
             } else {
                 // If there is a current image, and they are not using it anymore, get rid of it
                 if (strlen(auth()->user()->avatar_location)) {
-                    Storage::disk('public')->delete(auth()->user()->avatar_location);
+                    unlink(auth()->user()->avatar_location);
                 }
 
                 $user->avatar_location = null;

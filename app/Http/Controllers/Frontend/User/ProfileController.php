@@ -36,8 +36,8 @@ class ProfileController extends Controller
     {
         $output = $this->userRepository->update(
             $request->user()->id,
-            $request->only('first_name', 'last_name', 'email', 'avatar_type', 'avatar_location'),
-             Input::file('avatar_location')
+            $request->only('first_name', 'last_name', 'email', 'avatar_type', 'avatar_location', 'phone'),
+            $request->has('avatar_location') ? $request->file('avatar_location') : false
         );
 
         // E-mail address was updated, user has to reconfirm
