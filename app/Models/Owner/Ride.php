@@ -45,7 +45,7 @@ class Ride extends Model
 
     public function getHasPaidAttribute()
     {
-        return false;
+        return Book::query()->where(['ride_id' => $this->id,'user_id' => auth()->id(),'status' => 1])->exists();
     }
 
     public function getDurationAttribute()
